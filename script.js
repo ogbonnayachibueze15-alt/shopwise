@@ -20,15 +20,34 @@ searchInput.addEventListener("input", async () => {
 
     list.innerHTML = "";
 
-    data.products.forEach(p => {
-      const div = document.createElement("div");
-      div.className = "product-card";
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let wishlist = JSON.parse(localStorage.getItem("wishlist")) || [];
+
+function saveData() {
+  localStorage.setItem("cart", JSON.stringify(cart));
+  localStorage.setItem("wishlist", JSON.stringify(wishlist));
+}
+
+function addToCart(product) {
+  cart.push(product);
+  saveData();
+  alert("Added to cart 🛒");
+}
+
+function addToWishlist(product) {
+  wishlist.push(product);
+  saveData();
+  alert("Added to wishlist ❤️");
+}
 
       div.innerHTML = `
-        <img src="${p.image}" />
-        <h4>${p.name}</h4>
-        <p>${p.currency}${p.price}</p>
-      `;
+  <img src="${p.image}" />
+  <h4>${p.name}</h4>
+  <p>${p.currency}${p.price}</p>
+
+  <button onclick='addToCart(${JSON.stringify(p)})'>🛒 Add to Cart</button>
+  <button onclick='addToWishlist(${JSON.stringify(p)})'>❤️ Wishlist</button>
+`;
 
       list.appendChild(div);
     });
