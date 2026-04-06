@@ -2,7 +2,7 @@ const list = document.getElementById('list');
 const searchInput = document.getElementById('search');
 
 // 🔥 CHANGE THIS AFTER DEPLOYMENT
-const API_URL = "https://shop-wise-tau.vercel.app";
+const API_URL = "https://shop-wise-tau.vercel.app/api/search";
 
 searchInput.addEventListener("input", async () => {
   const query = searchInput.value;
